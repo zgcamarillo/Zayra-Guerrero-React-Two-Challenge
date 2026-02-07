@@ -1,42 +1,73 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #e6e6c7;
+}
+
+@keyframes cloud {
+  50% {
+  	transform: translateY(-12px);
+  }
+}
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+.page {
+  min-height: 100vh;
+  padding: 40px 16px;
+  display: flex;
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
-  padding: 2em;
+  text-align: center;
+  background: #fef6e1;
+  width: 100%;
+  max-width: 800px;
+  border: 12px solid #fae4d7;
+  border-radius: 16px;
+  padding-bottom: 90px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-
-.read-the-docs {
-  color: #888;
+.card h3 {
+  color: #e9a488;
+  font-size: 150px;
+}
+.btn-row {
+  color: #f7fbda;
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+#increase {
+  border: 6px #a4b771 solid;
+  background: #acbf79;
+  font-size: 30px;
+  border-radius: 20px;
+  padding: 10px 15px;
+  color: #feede0;
+  font-family: "Playwrite DE Grund", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+#decrease {
+  border: 6px #ce9989 solid;
+  background: #eaa596;
+  font-size: 30px;
+  border-radius: 20px;
+  padding: 10px 15px;
+  color: #feede0;
+  font-family: "Playwrite DE Grund", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
