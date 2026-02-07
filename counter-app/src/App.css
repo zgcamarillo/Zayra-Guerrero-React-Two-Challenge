@@ -4,16 +4,18 @@ html, body {
   background: #e6e6c7;
 }
 
-@keyframes cloud {
-  50% {
-  	transform: translateY(-12px);
-  }
+@keyframes floatCloud {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-8px) translateX(10px); }
+  100% { transform: translateY(0) translateX(0); }
 }
 #root {
   min-height: 100%;
 }
 
 .page {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   padding: 40px 16px;
   display: flex;
@@ -23,6 +25,50 @@ html, body {
   align-items: center;
 }
 
+.cloud {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 40px;
+  opacity: 0.9;
+}
+
+.puffs {
+  position: absolute;
+  inset: 0;
+  width: 120px;
+  height: 40px;
+  border-radius: 999px;
+  background: #fbe5a9;
+  animation: floatCloud 4s infinite ease-in-out;
+}
+
+.puffs::before,
+.puffs::after {
+  content: "";
+  position: absolute;
+  background: #fbe5a9;
+  border-radius: 50%;
+}
+
+.puffs:before {
+  width: 46px;
+  height: 46px;
+  left: 8px;
+  top: -18px;
+}
+
+.puffs::after {
+  width: 58px;
+  height: 58px;
+  right: 10px;
+  top: -28px;
+}
+h1 {
+  z-index: 1;
+}
 .card {
   text-align: center;
   background: #fef6e1;
