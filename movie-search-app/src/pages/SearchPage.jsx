@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import "../App.css";
 
 export default function SearchPage() {
@@ -37,13 +37,35 @@ export default function SearchPage() {
         </div>
       </nav>
 
-      <div className="results-grid">
-        <h2>Results</h2>
+      {movies.length === 0 && (
+        <section className="empty-state">
+          <div className="hero">
+            <h2>Find your next movie night pick 🍿</h2>
+            <p>Search any title to see posters, ratings, and details.</p>
 
-        <ul className="results">
-          {movies.map((movie) => (
-            <li key={movie.id}>
-              <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none" }}>
+            <div className="suggestions">
+              {["Interstellar", "Barbie", "Spider-Man", "The Lion King"].map((s) => (
+                <button
+                  key={s}
+                  className="chip"
+                  onClick={() => setQuery(s)}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {movies.length > 0 && (
+        <div className="results-grid">
+          <h2>Results</h2>
+
+          <ul className="results">
+            {movies.map((movie) => (
+              <li key={movie.id}>
+                <Link to={`/movie/${movie.id}`}>
                 {movie.poster_path && (
                   <img
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -51,11 +73,12 @@ export default function SearchPage() {
                   />
                 )}
                 <p>{movie.title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
