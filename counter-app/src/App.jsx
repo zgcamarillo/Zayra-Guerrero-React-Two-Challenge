@@ -7,10 +7,9 @@ function App() {
   return (
     <div className="page">
       <div className="cloud">
-        <div className="puffs">
-          
-        </div>
+        <div className="puffs"></div>
       </div>
+
       <h1>Countly</h1>
       <div className="card">
         <h3>{count}</h3>
