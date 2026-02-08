@@ -12,19 +12,41 @@ function TodoDetail({ todos, deleteTodo, updateTodo }) {
   if (!todo) return <p>To Do not found</p>
 
   return (
-    <>
+    <div className="todo-detail">
     <h2>To Do Detail</h2>
+
     <input
       value={editText}
       onChange={(e) => setEditText(e.target.value)}
     />
+
     <button
       onClick={() => {updateTodo(todo.id, editText); navigate("/"); }}
       disabled={!editText.trim()}
     >
+
       Save
     </button>
+
     <p>{todo.text}</p>
+    <div className="todo-meta">
+      <span className={`pill ${todo.priority?.toLowerCase() || "medium"}`}>
+        {todo.priority || "Medium"}
+      </span>
+
+      <span className="pill">
+        Due: {todo.dueDate ? todo.dueDate : "None"}
+      </span>
+    </div>
+
+    {todo.notes?.trim() && (
+      <div className="todo-notes">
+        <h4>Notes</h4>
+        <p>{todo.notes}</p>
+      </div>
+    )}
+
+
     <button 
       onClick={() => {
       deleteTodo(todo.id) 
@@ -32,22 +54,41 @@ function TodoDetail({ todos, deleteTodo, updateTodo }) {
       Delete
       </button>
     <Link to="/">Back</Link>
-    </>  
+    </div>  
   )
 }
 
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
+  const [newNotes, setNewNotes] = useState("");
+  const [newPriority, setNewPriority] = useState("Medium");
+  const [newDueDate, setNewDueDate] = useState("");
+  
 
-  const [todos, setTodos] = useState([])
-  const [newTodo, setNewTodo] =useState("")
 
   function addTodo() {
-    if(!newTodo.trim()) return 
+  if (!newTodo.trim()) return;
 
-    setTodos([...todos, { id: Date.now(), text: newTodo, done: false}])
-    setNewTodo("")
-  }
+  setTodos([
+    ...todos,
+    {
+      id: Date.now(),
+      text: newTodo,
+      notes: newNotes,
+      priority: newPriority,
+      dueDate: newDueDate,
+      done: false,
+    },
+  ]);
+
+  setNewTodo("");
+  setNewNotes("");
+  setNewPriority("Medium");
+  setNewDueDate("");
+}
+
 
   function deleteTodo(id) {
   setTodos(todos.filter((todo) => todo.id !== id))
@@ -108,8 +149,32 @@ function App() {
                 placeholder="New To Do"
                 onKeyDown={(e) => e.key === "Enter" && addTodo()}
               />
+
               <button onClick={addTodo}>Add</button>
             </div>
+
+            <div className="add-details">
+              <textarea
+                value={newNotes}
+                onChange={(e) => setNewNotes(e.target.value)}
+                placeholder="Notes (optional)"
+              />
+
+              <div className="row">
+                <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)}>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+
+                <input
+                  type="date"
+                  value={newDueDate}
+                  onChange={(e) => setNewDueDate(e.target.value)}
+                />
+              </div>
+            </div>
+
           </>
         }
       />
