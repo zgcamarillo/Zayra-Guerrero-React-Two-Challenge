@@ -10,12 +10,15 @@ body {
 }
 #list-container {
   background: #f8efc6;
-  min-width: 800px;
+  width: min(900px, 95vw);
+  padding: 22px 18px 28px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 26px;
+  border: 10px solid #f3e7b3;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
 }
 #list-container .title {
   display: flex;
@@ -23,8 +26,8 @@ body {
   margin: 20px auto;
 }
 #list-container .title img {
-  width: 140px;
-  height: 140px;
+  width: 70px;
+  height: 70px;
 }
 #list-container h1 {
   background: #9eaa5a;
@@ -37,17 +40,97 @@ body {
   background: #e5ba7d;
   display: flex;
   flex-direction: row;
-  padding: 10px;
-  border-radius: 50px;
-  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 999px;
+  width: min(520px, 92vw);
   border: 7px solid #c2a064;
+  align-items: center;
+  justify-content: space-between;
 }
 .add-container input {
   background: transparent;
   border: none;
   margin-left: 5px;
+  font-size: 18px;
+  outline: none;
+  width: 200px;
 }
 .add-container button {
-  background: transparent;
+  background: #fff7df;
   border: 3px solid #c2a064;
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+.todo-card {
+  width: min(520px, 92vw);
+  margin-top: 6px;
+  margin-bottom: 16px;
+  background: #fff7df;
+  border-radius: 24px;
+  padding: 16px 18px 18px;
+
+  border: 8px solid #f1d7b2;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.10);
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.6);
+  border: 2px dashed rgba(194,160,100,0.7);
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  border: 2px solid #9eaa5a;
+  background: rgba(255,255,255,0.7);
+}
+.todo-item input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  accent-color: #9eaa5a;
+}
+
+.todo-item.done {
+  opacity: 0.75;
+  background: rgba(255,255,255,0.35);
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: #7a6b5a;
+}
+
+
+.todo-text {
+  text-align: left;
+  color: #3a2f22;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.todo-text:hover {
+  text-decoration: underline;
+}
+
+.empty-state {
+  text-align: center;
+  color: #6b5b4a;
+  margin-top: 6px;
 }

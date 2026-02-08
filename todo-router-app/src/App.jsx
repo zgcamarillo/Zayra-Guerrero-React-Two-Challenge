@@ -19,7 +19,7 @@ function TodoDetail({ todos, deleteTodo, updateTodo }) {
       onChange={(e) => setEditText(e.target.value)}
     />
     <button
-      onClick={() => updateTodo(todo.id, editText)}
+      onClick={() => {updateTodo(todo.id, editText); navigate("/"); }}
       disabled={!editText.trim()}
     >
       Save
@@ -45,7 +45,7 @@ function App() {
   function addTodo() {
     if(!newTodo.trim()) return 
 
-    setTodos([...todos, { id: Date.now(), text: newTodo}])
+    setTodos([...todos, { id: Date.now(), text: newTodo, done: false}])
     setNewTodo("")
   }
 
@@ -67,29 +67,48 @@ function App() {
 
       <Routes>
 
-        <Route 
-          path="/" 
-          element={
-            <div class="add-container">
-              <input
-                value={newTodo}
-                onChange={(e) => setNewTodo(e.target.value)}
-                placeholder="New To Do"
-              />
-
-              <button onClick={addTodo}>Add To Do</button>
-
-              <ul>
+      <Route
+        path="/"
+        element={
+          <>
+        
+            <div className="todo-card">
+              <ul className="todo-list">
                 {todos.map((todo) => (
-                  <li key={todo.id}>
-                    <Link to={`/todo/${todo.id}`}>{todo.text}</Link>
+                  <li className={`todo-item ${todo.done ? "done" : ""}`} key={todo.id}>
+                    <input
+                      type="checkbox"
+                      checked={todo.done}
+                      onChange={() => toggleTodo(todo.id)}
+                    />
+
+                    <Link className="todo-text" to={`/todo/${todo.id}`}>
+                      {todo.text}
+                    </Link>
                   </li>
                 ))}
               </ul>
 
+
+              {todos.length === 0 && (
+                <p className="empty-state">Add a task to get started ✨</p>
+              )}
             </div>
-          } 
-        />
+
+            <div className="add-container">
+              <input
+                value={newTodo}
+                onChange={(e) => setNewTodo(e.target.value)}
+                placeholder="New To Do"
+                onKeyDown={(e) => e.key === "Enter" && addTodo()}
+              />
+              <button onClick={addTodo}>Add</button>
+            </div>
+          </>
+        }
+      />
+
+
 
         <Route path="/todo/:id" element={<TodoDetail todos={todos} 
         deleteTodo={deleteTodo} 
