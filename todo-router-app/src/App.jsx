@@ -56,6 +56,12 @@ function App() {
   function updateTodo(id, newText) {
     setTodos(todos.map(t => (t.id === id ? {...t, text: newText } : t)))
   }
+  function toggleTodo(id) {
+  setTodos(todos.map(todo =>
+    todo.id === id ? { ...todo, done: !todo.done } : todo
+  ));
+}
+
 
   return (
     <div id="list-container">
