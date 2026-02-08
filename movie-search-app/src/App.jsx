@@ -20,32 +20,38 @@ function App() {
 
   
   return (
-    <>
-      <h1>Movie Search</h1>
+    <div id="movie-page">
+      <nav className="heading">
+        <h1>Vid Space</h1>
+          <div className="search-bar">
+          <input 
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search for a movie..."
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+      </nav>
+      
 
-      <input 
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for a movie..."
-        />
-        <button onClick={handleSearch}>Search</button>
-        {movies.length === 0 && <p>No results yet</p>}
-        
+      
+      <div className="results-grid">
         <h2>Results</h2>
-        <ul>
+        <ul className="results">
           {movies.map((movie) => (
             <li key={movie.id}>
-              <p>{movie.title}</p>
               {movie.poster_path && (
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.title}
                 />
               )}
+              <p>{movie.title}</p>
              </li>
           ))}
         </ul>
-      </>
+        </div>
+      </div>
   )
 }
 
